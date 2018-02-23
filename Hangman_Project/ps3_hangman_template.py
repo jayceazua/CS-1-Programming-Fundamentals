@@ -125,7 +125,7 @@ def hangman(secret_word):
                 print "You are still missing these letters {} ".format(get_guessed_word(secret_word, letters_guessed))
         else:
             # if the letter is in the letters guessed list print the following
-            print('Guess another letter')
+            print('Guess another letter that you have not chosen yet.')
     else:
         # once the loop returns False print the message that the user won
         print('You won! the word was {}'.format(secret_word))
@@ -136,9 +136,6 @@ def hangman(secret_word):
 # 2. exit if the user reaches their max turns allowed.
 # 3. allow the user to guess the complete word if given the chance
 # 4. once the user wins or losess allow for the user to reset the game
-
-
-
 
 
 secret_word = load_word()
