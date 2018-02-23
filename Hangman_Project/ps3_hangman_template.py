@@ -98,28 +98,44 @@ def hangman(secret_word):
       user has not yet guessed.
     '''
     # FILL IN YOUR CODE HERE...
+    # get the length of the secret_word
     length_word = len(secret_word)
+    # declare an empty list
     letters_guessed = []
     print("What is your name?")
+    # get the name of the user
     user_name = raw_input('-> ')
+    # print welcome message
     print("Welcome {}, to Jayce's CS1 Hangman Game,".format(user_name))
     print("the word to guess is {} letters long.".format(length_word))
 
+    # while the word is not guessed right continue to play the game
     while is_word_guessed(secret_word, letters_guessed) is not True:
         print('Guess a letter that is in the word.')
+        # capture the user's input of a single letter
         user_guess = raw_input('-> ')
+        # if the user's input is not in the letters already guessed list
         if user_guess not in letters_guessed:
+            # append the new letter into the list
             letters_guessed.append(user_guess)
             if is_word_guessed(secret_word, letters_guessed) is not True:
+                # display to the user the amount of letters left to guess
                 print "Letter you have not guessed yet: {} ".format(get_available_letters(letters_guessed))
+                # show the word with underscores and the correctletters in order
                 print "You are still missing these letters {} ".format(get_guessed_word(secret_word, letters_guessed))
         else:
+            # if the letter is in the letters guessed list print the following
             print('Guess another letter')
     else:
+        # once the loop returns False print the message that the user won
         print('You won! the word was {}'.format(secret_word))
 
 
-
+# Future developments:
+# 1. limit the amount of turns
+# 2. exit if the user reaches their max turns allowed.
+# 3. allow the user to guess the complete word if given the chance
+# 4. once the user wins or losess allow for the user to reset the game
 
 
 
