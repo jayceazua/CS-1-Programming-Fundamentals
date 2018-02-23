@@ -30,7 +30,6 @@ def is_word_guessed(secret_word, letters_guessed):
              return False
     return True
 
-
 def get_guessed_word(secret_word, letters_guessed):
     '''
     secretWord: string, the random word the user is trying to guess.  This is selected on line 9.
@@ -54,11 +53,6 @@ def get_guessed_word(secret_word, letters_guessed):
     # return the word once we finish appending
     return word
 
-
-
-
-
-
 def get_available_letters(letters_guessed):
     '''
     lettersGuessed: list of letters that have been guessed so far
@@ -75,9 +69,6 @@ def get_available_letters(letters_guessed):
             choices_left.remove(letter)
     # return the choices_left after it removes everything from within
     return choices_left
-
-
-
 
 def hangman(secret_word):
     '''
