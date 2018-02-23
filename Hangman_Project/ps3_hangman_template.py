@@ -123,10 +123,10 @@ def hangman(secret_word):
 
 
 # Future developments:
-# 1. limit the amount of turns
-# 2. exit if the user reaches their max turns allowed.
-# 3. allow the user to guess the complete word if given the chance
-# 4. once the user wins or losess allow for the user to reset the game
+### 1. limit the amount of turns
+### 2. exit if the user reaches their max turns allowed.
+### 3. allow the user to guess the complete word if given the chance
+### 4. once the user wins or losess allow for the user to reset the game
 
 
 secret_word = load_word()
