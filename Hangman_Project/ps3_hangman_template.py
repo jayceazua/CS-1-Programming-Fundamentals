@@ -1,12 +1,17 @@
 import random
 
 def load_word():
-   f = open('words.txt', 'r')
+    # open the file and read it
+   f = open('hangman_words.txt', 'r')
+   # read it per lines
    words_list = f.readlines()
+   # close the file after
    f.close()
-
+   # put each word into a list split by their space
    words_list = words_list[0].split(' ')
+   # select random word from the words_list
    secret_word = random.choice(words_list)
+   # return that secret_word
    return secret_word
 
 def is_word_guessed(secret_word, letters_guessed):
@@ -16,8 +21,15 @@ def is_word_guessed(secret_word, letters_guessed):
     returns: boolean, True only if all the letters of secretWord are in lettersGuessed;
       False otherwise
     '''
-
     # FILL IN YOUR CODE HERE...
+    # iterate through the secret_word
+    for letter in secret_word:
+         # if the letter is not in the list of letters_guessed
+         if letter not in letters_guessed:
+             # return False and check again
+             return False
+    return True
+
 
 def get_guessed_word(secret_word, letters_guessed):
     '''
@@ -28,6 +40,21 @@ def get_guessed_word(secret_word, letters_guessed):
     in the word that the user has not yet guessed, shown an _ (underscore) instead.
     '''
     # FILL IN YOUR CODE HERE...
+    # declare a variable with empty string to append
+    word = ""
+    # loop through secret_word and get individual letters from here
+    for letter in secret_word:
+        # if the letter from the secret_word is in the letters_guessed
+        if letter in letters_guessed:
+        # append it in the word variable
+            word += letter + ""
+        # if not append it with a underscore
+        else:
+            word += "_ "
+    # return the word once we finish appending
+    return word
+
+
 
 
 
@@ -38,7 +65,17 @@ def get_available_letters(letters_guessed):
     returns: string, comprised of letters that represents what letters have not
       yet been guessed.
     '''
-    
+    # laziest way to convert a string into a list
+    choices_left = list("abcdefghijklmnopqrstuvwxyz")
+    # loop through the letters_guessed one letter at a time
+    for letter in letters_guessed:
+        # if the letter is in the choices_left
+        if letter in choices_left:
+            # remove it from the "list"
+            choices_left.remove(letter)
+    # return the choices_left after it removes everything from within
+    return choices_left
+
 
 
 
@@ -61,8 +98,32 @@ def hangman(secret_word):
       user has not yet guessed.
     '''
     # FILL IN YOUR CODE HERE...
+    length_word = len(secret_word)
+    letters_guessed = []
+    print("What is your name?")
+    user_name = raw_input('-> ')
+    print("Welcome {}, to Jayce's CS1 Hangman Game,".format(user_name))
+    print("the word to guess is {} letters long.".format(length_word))
+
+    while is_word_guessed(secret_word, letters_guessed) is not True:
+        print('Guess a letter that is in the word.')
+        user_guess = raw_input('-> ')
+        if user_guess not in letters_guessed:
+            letters_guessed.append(user_guess)
+            if is_word_guessed(secret_word, letters_guessed) is not True:
+                print "Letter you have not guessed yet: {} ".format(get_available_letters(letters_guessed))
+                print "You are still missing these letters {} ".format(get_guessed_word(secret_word, letters_guessed))
+        else:
+            print('Guess another letter')
+    else:
+        print('You won! the word was {}'.format(secret_word))
 
 
-#
-# secret_word = load_word()
-# hangman(load_word())
+
+
+
+
+
+
+secret_word = load_word()
+hangman(load_word())
