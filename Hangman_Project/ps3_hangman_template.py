@@ -101,7 +101,7 @@ def hangman(secret_word):
     print("the word to guess is {} letters long.".format(length_word))
 
     # while the word is not guessed right continue to play the game
-    while is_word_guessed(secret_word, letters_guessed) is not True:
+    while not is_word_guessed(secret_word, letters_guessed):
         print('Guess a letter that is in the word.')
         # capture the user's input of a single letter
         user_guess = raw_input('-> ')
@@ -109,7 +109,8 @@ def hangman(secret_word):
         if user_guess not in letters_guessed:
             # append the new letter into the list
             letters_guessed.append(user_guess)
-            if is_word_guessed(secret_word, letters_guessed) is not True:
+            # if is_word_guessed(secret_word, letters_guessed) is not True:
+            if not is_word_guessed(secret_word,letters_guessed):  # Idiomatic python example
                 # display to the user the amount of letters left to guess
                 print "Letter you have not guessed yet: {} ".format(get_available_letters(letters_guessed))
                 # show the word with underscores and the correctletters in order
