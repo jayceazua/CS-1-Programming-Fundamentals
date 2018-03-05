@@ -54,3 +54,79 @@ class Motorcycle(Car):
         Car.__init__(make, modal)
         self.wheels = 2
         self.seats = 1
+
+
+class Animal(object):
+    population = 0
+    def __init__(self, name, favoriteFood):
+        self.name = name
+        self.favoriteFood = favoriteFood
+        Animal.population += 1
+
+    def sleep(self):
+        print("{0.name} sleeps for 8 hours".format(self))
+
+    def eat(self, food):
+        print("{} eats {}".format(self.name, food))
+        if food == self.favoriteFood:
+            print("YUM! {0.name} wants more {0.favoriteFood}".format(self))
+
+    @classmethod
+    def populationCount(cls):
+        return cls.population
+
+
+class Tiger(Animal):
+    def __init__(self, name):
+        Animal.__init__(self, name, "meat")
+
+
+class Bear(Animal):
+    def __init__(self, name):
+        Animal.__init__(self, name, "fish")
+
+    def sleep(self):
+        print("{0.name} hibernates for 4 months".format(self))
+
+
+class Unicorn(Animal):
+    def __init__(self, name):
+        Animal.__init__(self, name, "marshmallows")
+
+    def sleep(self):
+        print("{0.name} sleeps in a cloud".format(self))
+
+
+class Giraffe(Animal):
+    def __init__(self, name):
+        Animal.__init__(self, name, "leaves")
+
+    def eat(self, food):
+        Animal.eat(self, food)
+        if food != self.favoriteFood:
+            print("YUCK! {} spits out {}".format(self.name, food))
+
+
+class Bee(Animal):
+    def __init__(self, name):
+        Animal.__init__(self, name, "pollen")
+
+    def sleep(self):
+        print("{0.name} never sleeps".format(self))
+
+    def eat(self, food):
+        Animal.eat(self, food)
+        if food != self.favoriteFood:
+            print("YUCK! {} spits out {}".format(self.name, food))
+
+
+class Zookeeper(object):
+    def __init__(self, name):
+        self.name = name
+
+    def feedAnimals(self, animals, food):
+        number = animals.__len__()
+        print("{} is feeding {} to {} of {} total animals".format(self.name, food, number, Animal.populationCount()))
+        for i in range(number):
+            animals[i].eat(food)
+            animals[i].sleep()

@@ -112,7 +112,6 @@ class Classroom(object):
             else:
                 print("{} is not enrolled in this {} class.".format(student_name, self.class_name))
 
-
     def _is_valid_grade(self, grade):
         # look it up and did not cheat.
         try:
@@ -132,25 +131,28 @@ class Classroom(object):
         # - Once user has entered input, validates input using _is_valid_grade() method.
             while not self._is_valid_grade(grade):
         #     - if input is not valid, asks user again for input.
-                grade = float(input("Enter {}'s grade for assignment {} --> ".format(student.name, assignment_name)))
+                grade = float(input("Enter {}'s grade for assignment on {} --> ".format(student.name, assignment_name)))
         # - If user input is valid, calls student's add_assignment() method and continues through loop.
             student.add_assignment(assignment_name, grade)
-
 
     def drop_assignment_for_student(self, student_name, assignment_name):
         # -  Expects student_name as String.
         # -  Expects assignment_name as String.
         # -  Loops through roster.values() and finds student with student_name passed in.
+        for student in self.roster.values():
         #     - If student does not exist, prints error message saying so.
+            if student.name is student_name:
+                student.delete_assignment(assignment_name)
         # -  Calls student's delete_assignment() method, with assignment_name as input.
-        pass
-
+            else:
+                print("{} is not enrolled in this {} class.".format(student_name, self.class_name))
 
     def drop_assignment_for_class(self, assignment_name):
         # -  Expects assignment_name as String.
         # -  Loops through each student in self.roster.values()
+        for student in self.roster.values():
         #     - Calls student's delete_assignment() method with assignment_name as input.
-        pass
+            student.delete_assignment(assignment_name)
 
 
     def get_student_GPA(self, student_name):
@@ -167,5 +169,26 @@ class Classroom(object):
     def get_class_average(self):
         # -  Expects no inputs.
         # -  Iterates through all students in self.roster.values() and returns the average of their GPA attributes.
+        total = 0
+        for student in self.roster.values():
+            total += student.GPA
+        return float(total) / len(self.roster)
 
-        pass
+# Room for Improvement - Stretch Challenges:
+# 1. Sometimes students join the class late, or
+#     have an excused absence for an assignment.
+#     That means they will not have a grade for this assignment
+
+# 2. Exploratory Data analysis.  
+#     Add functionality that allows teachers to see things such as:
+#     the class average on a specific assignment,
+#     the mean/median/mode for each assignment, or
+#     for overall student grades in the class.
+
+# 3. Data visualization.
+#     Add functionality that allows teachers to easily:
+#      create graphs of student performance on a given assignment, or
+#      for overall student performance in the class.
+#      This could be bar graphs of student performance on an assignment,
+#      line graphs of student performance over time in the class, or a number of other visualizations.
+#      (Hint--you’ll want to take a look at libraries such as Matplotlib if you plan on attempting this stretch challenge.)

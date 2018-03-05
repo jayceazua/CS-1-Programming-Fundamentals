@@ -1,6 +1,10 @@
+# from the command line stype: $ pytest text_classrooms.py -s
+# TODO: You must add the -s flag to work with inputs
+
 from classroom_template import Classroom
 from student_template import Student
 import pytest
+
 
 def create_classroom():
     new_classroom = Classroom("Chemistry", "Dr. O'Niel", "Mon/Wed 2PM - 4PM PST")
@@ -57,15 +61,6 @@ def test_add_assignment_for_student():
     assert student.assignments["Research Paper"] == 98
     assert new_classroom.add_assignment_for_student("Ryan", "Research Paper", 98) == None
 
-def test_get_student_GPA():
-    new_classroom = create_classroom()
-    student = Student("Jayce", 1)
-    new_classroom.roster[1] = student
-    new_classroom.add_assignment_for_student("Jayce", "Research Paper", 98)
-    student.add_assignment("Atoms and DNA", 91)
-    assert student.assignments["Atoms and DNA"] == 91
-    assert new_classroom.get_student_GPA("Jayce") == 94.5
-
 def test_add_assignment_for_class():
     classroom = create_classroom()
     student_1 = Student("Jayce", 1)
@@ -75,3 +70,54 @@ def test_add_assignment_for_class():
     classroom.add_assignment_for_class("Sex Education")
     assert student_1.assignments["Sex Education"] == 98.7
     assert student_2.assignments["Sex Education"] == 78.3
+
+def test_drop_assignment_for_student():
+    classroom = create_classroom()
+    student_1 = Student("Alex", 1)
+    student_2 = Student("Jones", 2)
+    classroom.roster[1] = student_1
+    classroom.roster[2] = student_2
+    for student in classroom.roster.values():
+        student.add_assignment("Google Research Paper", 100)
+        assert student.assignments["Google Research Paper"] == 100
+    classroom.drop_assignment_for_student("Jones", "Google Research Paper")
+    assert len(student_2.assignments) == 0
+    assert len(classroom.roster[2].assignments) == 0
+    assert len(student_1.assignments) == 1
+    classroom.drop_assignment_for_student("Alex", "Google Research Paper")
+    assert len(classroom.roster[1].assignments) == 0
+
+
+def test_drop_assignment_for_class():
+    classroom = create_classroom()
+    student_1 = Student("Katherine", 1)
+    student_2 = Student("Jayce", 2)
+    classroom.roster[1] = student_1
+    classroom.roster[2] = student_2
+    for student in classroom.roster.values():
+        student.add_assignment("Google Research Paper", 100)
+        assert student.assignments["Google Research Paper"] == 100
+    classroom.drop_assignment_for_class("Google Research Paper")
+    for student in classroom.roster.values():
+        assert len(student.assignments) == 0
+
+def test_get_student_GPA():
+    new_classroom = create_classroom()
+    student = Student("Jayce", 1)
+    student_2 = Student("James", 2)
+    new_classroom.roster[1] = student
+    new_classroom.roster[2] = student_2
+    new_classroom.add_assignment_for_student("Jayce", "Research Paper", 98)
+    student.add_assignment("Atoms and DNA", 91)
+    assert student.assignments["Atoms and DNA"] == 91
+    assert new_classroom.get_student_GPA("Jayce") == 94.5
+
+def test_get_class_average():
+    classroom = create_classroom()
+    student_1 = Student("Jayce", 1)
+    student_2 = Student("James", 2)
+    classroom.roster[1] = student_1
+    classroom.roster[2] = student_2
+    student_1.add_assignment("Final Exam", 90)
+    student_2.add_assignment("Midterm Exam", 100)
+    assert classroom.get_class_average() == 95

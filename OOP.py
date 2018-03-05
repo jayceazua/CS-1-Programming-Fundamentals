@@ -10,16 +10,33 @@ class Employee:
         self.first = first
         self.last = first
         self.pay = pay
-        self.email = first + '.' + last + '@company.com'
     # keeps tract of how many instances it was created
         Employee.num_of_emps += 1
     # always put self when creating methods
+    @property
+    def email(self):
+        return '{}.{}'.format(self.first, self.last)
+
+    @property
     def fullname(self):
         return '{} {}'.format(self.first, self.last)
+
+    @fullname.setter
+    def fullname(self, name):
+        first, last = name.split(' ')
+        self.first = first
+        self.last = last
+
+    @fullname.deleter
+    def fullname(self):
+        print('Delete name!')
+        self.first = None
+        self.last = None
 
     def apply_raise(self):
         self.pay = int(self.pay * self.raise_amt)
 
+        # special methods -- dunders
     def __repr__(self):
         return "Employee('{}', '{}', '{}')".format(self.first, self.last, self.pay)
 
@@ -29,6 +46,7 @@ class Employee:
     def __add__(self, other):
         return self.pay + other.pay
     # Decorators
+
     @classmethod # working with class methods cls is like passing self
     def set_raise_amt(cls, amt):
         cls.raise_amt = amt
@@ -83,6 +101,7 @@ class Manager(Employee):
 
 
 # dunder _ _ special method _ _
+# look under the hood and how special methods work.
 repr()
 # unambigious and used for debugging for other developers
 str()
