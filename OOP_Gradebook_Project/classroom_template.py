@@ -154,7 +154,6 @@ class Classroom(object):
         #     - Calls student's delete_assignment() method with assignment_name as input.
             student.delete_assignment(assignment_name)
 
-
     def get_student_GPA(self, student_name):
         # - Expects student_name as String.
         # - Searches self.roster for student with student_name.
@@ -173,22 +172,3 @@ class Classroom(object):
         for student in self.roster.values():
             total += student.GPA
         return float(total) / len(self.roster)
-
-# Room for Improvement - Stretch Challenges:
-# 1. Sometimes students join the class late, or
-#     have an excused absence for an assignment.
-#     That means they will not have a grade for this assignment
-
-# 2. Exploratory Data analysis.  
-#     Add functionality that allows teachers to see things such as:
-#     the class average on a specific assignment,
-#     the mean/median/mode for each assignment, or
-#     for overall student grades in the class.
-
-# 3. Data visualization.
-#     Add functionality that allows teachers to easily:
-#      create graphs of student performance on a given assignment, or
-#      for overall student performance in the class.
-#      This could be bar graphs of student performance on an assignment,
-#      line graphs of student performance over time in the class, or a number of other visualizations.
-#      (Hint--you’ll want to take a look at libraries such as Matplotlib if you plan on attempting this stretch challenge.)

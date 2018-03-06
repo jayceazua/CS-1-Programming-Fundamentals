@@ -1,6 +1,3 @@
-# from the command line stype: $ pytest text_classrooms.py -s
-# TODO: You must add the -s flag to work with inputs
-
 from classroom_template import Classroom
 from student_template import Student
 import pytest
