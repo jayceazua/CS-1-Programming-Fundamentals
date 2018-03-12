@@ -1,0 +1,5 @@
+_pycache_
+.pytest_cache
+person.pyc
+simulation.pyc
+logger.pyc

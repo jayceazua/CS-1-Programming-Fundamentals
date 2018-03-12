@@ -1,0 +1,42 @@
+from simulation import Simulation
+import pytest
+
+
+def setup_simulation():
+    pop_size = 100000
+    vacc_percentage = 0.90
+    virus_name = 'Zombies'
+    mortality_rate = 0.70
+    basic_repro_num = 0.25
+    initial_infected = 10
+    simulation = Simulation(pop_size, vacc_percentage, virus_name, mortality_rate, basic_repro_num, initial_infected)
+    #     simulation.run()
+    return simulation
+
+def test_setup_simulation():
+    simulation = setup_simulation()
+    assert simulation.population_size == 100000
+    assert len(simulation.population) == 100000
+    assert len(simulation.population) == simulation.population_size
+    assert simulation.vacc_percentage == 0.90
+    vaccinated = 0
+    not_vaccinated_and_not_infected = 0
+    infected_count = 0
+    for person in simulation.population:
+        if person.is_vaccinated is True and person.infected is False:
+            vaccinated += 1
+        else:
+            if person.infected is True and person.is_vaccinated is False:
+                infected_count += 1
+            elif person.is_vaccinated is False and person.infected is False:
+                not_vaccinated_and_not_infected += 1
+    assert vaccinated == 89945
+    assert not_vaccinated_and_not_infected == 10045
+    assert infected_count == 10
+    assert simulation.total_infected == 10
+    assert simulation.current_infected == 10
+    assert vaccinated + not_vaccinated_and_not_infected + infected_count == 100000
+    assert simulation.virus_name == 'Zombies'
+    assert simulation.mortality_rate == 0.70
+    assert simulation.basic_repro_num == 0.25
+    assert simulation.next_person_id == 100000
