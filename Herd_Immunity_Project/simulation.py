@@ -120,22 +120,21 @@ class Simulation(object):
 
 
 
-pop_size = 100000
-vacc_percentage = 0.90
-virus_name = 'Zombies'
-mortality_rate = 0.70
-basic_repro_num = 0.25
-initial_infected = 10
-simulation = Simulation(pop_size, vacc_percentage, virus_name, mortality_rate, basic_repro_num, initial_infected)
-simulation.run()
-print(simulation.total_dead)
-print(simulation.total_infected)
-print(simulation.current_infected)
+# pop_size = 300
+# vacc_percentage = 0.90
+# virus_name = 'Zombies'
+# mortality_rate = 0.70
+# basic_repro_num = 0.25
+# initial_infected = 10
+# simulation = Simulation(pop_size, vacc_percentage, virus_name, mortality_rate, basic_repro_num, initial_infected)
+# simulation.run()
+# print('The total amount dead: {}'.format(simulation.total_dead))
+# print('Total amount of people infected: {}'.format(simulation.total_infected))
+# print('Total amount currently infected: {}'.format(simulation.current_infected))
 # person = simulation.population[0]
 # random_person = random.choice(simulation.population)
 # # random_person = simulation.population[11]
 # simulation.interaction(person, random_person)
-
 
 
 

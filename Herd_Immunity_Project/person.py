@@ -40,8 +40,6 @@ class Person(object):
     '''
 
     def __init__(self, _id, is_vaccinated, infected=False):
-        # TODO:  Finish this method.  Follow the instructions in the class documentation
-        # to set the corret values for the following attributes.
         self._id = _id
         self.is_vaccinated = is_vaccinated
         self.is_alive = True

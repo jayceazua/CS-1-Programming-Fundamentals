@@ -1,4 +1,5 @@
 from simulation import Simulation
+from person import Person
 import pytest
 
 
