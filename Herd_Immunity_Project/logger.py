@@ -55,8 +55,7 @@ class Logger(object):
         # full file name of the file that the logs will be written to.
         self.file_name = None
 
-    def write_metadata(self, pop_size, vacc_percentage, virus_name, mortality_rate,
-                       basic_repro_num):
+    def write_metadata(self, pop_size, vacc_percentage, virus_name, mortality_rate, basic_repro_num):
         # TODO: Finish this method.  The simulation class should use this method
         # immediately upon creation, to log the specific parameters of the simulation
         # as the first line of the file.  This line of metadata should be tab-delimited
@@ -69,8 +68,7 @@ class Logger(object):
         # event logged ends up on a separate line!
         pass
 
-    def log_interaction(self, person1, person2, did_infect=None,
-                        person2_vacc=None, person2_sick=None):
+    def log_interaction(self, person1, person2, did_infect=None, person2_vacc=None, person2_sick=None):
         # TODO: Finish this method.  The Simulation object should use this method to
         # log every interaction a sick individual has during each time step.  This method
         # should accomplish this by using the information from person1 (the infected person),

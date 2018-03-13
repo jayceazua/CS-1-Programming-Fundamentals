@@ -10,7 +10,6 @@ def setup_simulation():
     basic_repro_num = 0.25
     initial_infected = 10
     simulation = Simulation(pop_size, vacc_percentage, virus_name, mortality_rate, basic_repro_num, initial_infected)
-    #     simulation.run()
     return simulation
 
 def test_setup_simulation():
@@ -30,8 +29,8 @@ def test_setup_simulation():
                 infected_count += 1
             elif person.is_vaccinated is False and person.infected is False:
                 not_vaccinated_and_not_infected += 1
-    assert vaccinated == 89945
-    assert not_vaccinated_and_not_infected == 10045
+    assert vaccinated == 89914
+    assert not_vaccinated_and_not_infected == 10076
     assert infected_count == 10
     assert simulation.total_infected == 10
     assert simulation.current_infected == 10

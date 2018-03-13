@@ -1,5 +1,4 @@
 import random
-# TODO: Import the virus class
 
 class Person(object):
     '''
@@ -30,15 +29,14 @@ class Person(object):
             self.infection.  Otherwise, self.infection should be set to None.
 
     did_survive_infection(self):
-        - Only called if infection attribute is not None.
+        - Only called if infection attribute is not False.
         - Takes no inputs.
         - Generates a random number between 0 and 1.
-        - Compares random number to mortality_rate attribute stored in person's infection
-            attribute.
+        - Compares random number to mortality_rate attribute stored in person's infection attribute.  ?
             - If random number is smaller, person has died from disease.
                 is_alive is changed to false.
             - If random number is larger, person has survived disease.  Person's
-            is_vaccinated attribute is changed to True, and set self.infected to None.
+            is_vaccinated attribute is changed to True, and set self.infected to False.
     '''
 
     def __init__(self, _id, is_vaccinated, infected=False):
@@ -50,16 +48,16 @@ class Person(object):
         self.infected = infected
 
 
-    def did_survive_infection(self):
+    def did_survive_infection(self, mortality_rate):
         # TODO:  Finish this method. Follow the instructions in the class documentation
         # for resolve_infection.  If person dies, set is_alive to False and return False.
         # If person lives, set is_vaccinated = True, infected = None, return True.
-        pass
-        # - Only called if infection attribute is not None.
-        # - Takes no inputs.
-        # - Generates a random number between 0 and 1. -> random.uniform(0,1)
-        # - Compares random number to mortality_rate attribute stored in person's infection attribute.
-        #     - If random number is smaller, person has died from disease.
-        #         is_alive is changed to false.
-        #     - If random number is larger, person has survived disease.
-        #       Person's is_vaccinated attribute is changed to True, and set self.infected to None.
+        assert self.infected == True
+        but_did_you_die = random.uniform(0,1)
+        if but_did_you_die < mortality_rate: # I am confused... how can I transfer mortality_rate in here...
+            self.is_alive = False
+            return False
+        else:
+            self.is_vaccinated = True
+            self.infected = False
+            return True
