@@ -47,15 +47,12 @@ class Person(object):
 
 
     def did_survive_infection(self, mortality_rate):
-        # TODO:  Finish this method. Follow the instructions in the class documentation
-        # for resolve_infection.  If person dies, set is_alive to False and return False.
-        # If person lives, set is_vaccinated = True, infected = None, return True.
-        assert self.infected == True
-        but_did_you_die = random.uniform(0,1)
-        if but_did_you_die < mortality_rate: # I am confused... how can I transfer mortality_rate in here...
-            self.is_alive = False
-            return False
-        else:
-            self.is_vaccinated = True
-            self.infected = False
-            return True
+        if self.infected:
+            but_did_you_die = random.random()
+            if but_did_you_die >= mortality_rate:
+                self.is_vaccinated = True
+                self.infected = False
+                return True
+            else:
+                self.is_alive = False
+                return False

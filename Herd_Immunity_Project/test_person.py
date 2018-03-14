@@ -39,8 +39,18 @@ def test_create_person():
 def test_did_survive_infection():
     simulation = create_simulation()
     person = Person(11, False, True)
+    person_1 = Person(12, True)
     assert person.is_alive == True
+    assert person_1.is_alive == True
     assert person.is_vaccinated == False
+    assert person_1.is_vaccinated == True
     assert person.infected == True
+    assert person_1.infected == False
     person.did_survive_infection(simulation.mortality_rate)
+    assert person_1.did_survive_infection(simulation.mortality_rate) == True
     assert person.is_alive == False
+    assert person_1.is_alive == True
+
+
+
+test_did_survive_infection()

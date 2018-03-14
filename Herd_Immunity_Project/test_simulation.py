@@ -1,6 +1,6 @@
 from simulation import Simulation
 from person import Person
-import pytest
+import pytest, random
 
 
 def setup_simulation():
@@ -13,7 +13,7 @@ def setup_simulation():
     simulation = Simulation(pop_size, vacc_percentage, virus_name, mortality_rate, basic_repro_num, initial_infected)
     return simulation
 
-def test_setup_simulation():
+def test_create_population():
     simulation = setup_simulation()
     assert simulation.population_size == 100000
     assert len(simulation.population) == 100000
@@ -40,3 +40,10 @@ def test_setup_simulation():
     assert simulation.mortality_rate == 0.70
     assert simulation.basic_repro_num == 0.25
     assert simulation.next_person_id == 100000
+
+def test_interaction():
+    simulation = setup_simulation()
+    person = simulation.population[0]
+    random_person = simulation.population[2522]
+    simulation.interaction(person, random_person)
+    assert len(simulation.newly_infected) == 1
