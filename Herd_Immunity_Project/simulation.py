@@ -31,14 +31,15 @@ class Simulation(object):
         self.virus_name = virus_name
         self.mortality_rate = mortality_rate
         self.basic_repro_num = basic_repro_num
+        self.newly_infected = []
+        self._create_population(initial_infected)
         self.file_name = "{}_simulation_pop_{}_vp_{}_infected_{}.txt".format(virus_name, population_size, vacc_percentage, initial_infected)
         # TODO: Create a Logger object and bind it to self.logger.  You should use this
         # logger object to log all events of any importance during the simulation.  Don't forget
         # to call these logger methods in the corresponding parts of the simulation!
         self.logger = None
 
-        self.newly_infected = []
-        self._create_population(initial_infected)
+
 
     def _create_population(self, initial_infected):
         self.population = []
@@ -135,32 +136,22 @@ class Simulation(object):
         self.newly_infected = []
 
 
+if __name__ == "__main__":
+    params = sys.argv[1:]
+    pop_size = int(params[0])
+    vacc_percentage = float(params[1])
+    virus_name = str(params[2])
+    mortality_rate = float(params[3])
+    basic_repro_num = float(params[4])
+    if len(params) == 6:
+        initial_infected = int(params[5])
+    else:
+        initial_infected = 1
+    simulation = Simulation(pop_size, vacc_percentage, virus_name, mortality_rate, basic_repro_num, initial_infected)
+    simulation.run()
 
-pop_size = 100000
-vacc_percentage = 0.90
-virus_name = 'Zombie'
-mortality_rate = 0.70
-basic_repro_num = 0.25
-initial_infected = 10
-simulation = Simulation(pop_size, vacc_percentage, virus_name, mortality_rate, basic_repro_num, initial_infected)
-simulation.run()
-print(simulation.newly_infected)
-print('The total amount dead: {}'.format(simulation.total_dead))
-print('Total population: {}'.format(simulation.population_size))
-print('The total amount healed: {}'.format(simulation.total_healed))
-print('Total amount of people infected: {}'.format(simulation.total_infected))
-print('Total amount currently infected: {}'.format(simulation.current_infected))
-
-# if __name__ == "__main__":
-#     params = sys.argv[1:]
-#     pop_size = int(params[0])
-#     vacc_percentage = float(params[1])
-#     virus_name = str(params[2])
-#     mortality_rate = float(params[3])
-#     basic_repro_num = float(params[4])
-#     if len(params) == 6:
-#         initial_infected = int(params[5])
-#     else:
-#         initial_infected = 1
-#     simulation = Simulation(pop_size, vacc_percentage, virus_name, mortality_rate, basic_repro_num, initial_infected)
-#     simulation.run()
+    print('The total amount dead: {}'.format(simulation.total_dead))
+    print('Total population: {}'.format(simulation.population_size))
+    print('The total amount healed: {}'.format(simulation.total_healed))
+    print('Total amount of people infected: {}'.format(simulation.total_infected))
+    print('Total amount currently infected: {}'.format(simulation.current_infected))
